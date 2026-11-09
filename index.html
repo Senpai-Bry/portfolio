@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bryan Hurst | Web developer</title>
+  <meta name="description" content="Bryan Hurst is a web developer in Goose Creek, SC. Musician, diesel mechanic, dancer and photographer turned coder.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Bryan Hurst</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#projects">Projects</a>
+        <a href="#about" class="hide-sm">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO: name, one line, and the career route -->
+    <section class="hero">
+      <div class="wrap">
+        <h1>Bryan Hurst</h1>
+        <p class="lede">Web developer in Goose Creek, South Carolina. I got here by way of music, diesel engines, dance and photography, and I use all of it when I build.</p>
+
+        <ol class="route" aria-label="Career path">
+          <li>
+            <span class="stop" aria-hidden="true">1</span>
+            <span class="role">Musician</span>
+            <p>Building tracks in layers and listening for what's off.</p>
+          </li>
+          <li>
+            <span class="stop" aria-hidden="true">2</span>
+            <span class="role">Diesel mechanic</span>
+            <p>12 years of diagnosis: find the symptom, isolate the cause, fix it.</p>
+          </li>
+          <li>
+            <span class="stop" aria-hidden="true">3</span>
+            <span class="role">Dancer</span>
+            <p>Learning how a little friendly competition pushes people.</p>
+          </li>
+          <li>
+            <span class="stop" aria-hidden="true">4</span>
+            <span class="role">Photographer</span>
+            <p>Seeing a place and finding the frame in it.</p>
+          </li>
+          <li class="now">
+            <span class="stop" aria-hidden="true">5</span>
+            <span class="role">Web developer</span>
+            <p>Building full-stack web apps that get people out into their city.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <p>Live apps, built and deployed on my own.</p>
+        </div>
+
+        <!-- Featured: Vantage -->
+        <article class="feature">
+          <figure>
+            <a href="vantage.html" class="shot" aria-label="Read the Vantage case study">
+              <img src="images/vantage-02-turf-map-desktop.webp" width="1600" height="1000"
+                   alt="Vantage turf map: two zones in North Charleston shaded orange, their borders following real streets.">
+            </a>
+          </figure>
+          <div>
+            <h3>Vantage</h3>
+            <p>A web game that turns street photography into a turf war. Take the best photo at a real landmark and the spot is yours until someone shoots a better one.</p>
+            <ul class="stack" aria-label="Built with">
+              <li>Node.js</li><li>Express</li><li>SQLite</li><li>Leaflet</li><li>OpenStreetMap</li>
+            </ul>
+            <div class="links">
+              <a class="button" href="vantage.html">Read the case study</a>
+              <a href="https://vantageturf.com">vantageturf.com</a>
+              <a href="https://github.com/Senpai-Bry/vantage">Code on GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Other projects -->
+        <div class="more">
+          <article class="project">
+            <h3>Mech Relay</h3>
+            <!-- TODO (Bry): replace this line with a one-sentence description of Mech Relay -->
+            <p>Live at mechrelay.dev. Case study coming soon.</p>
+            <div class="links">
+              <a href="https://mechrelay.dev">mechrelay.dev</a>
+            </div>
+          </article>
+          <article class="project planned">
+            <h3>Project three</h3>
+            <p>In planning.</p>
+          </article>
+          <article class="project planned">
+            <h3>Project four</h3>
+            <p>In planning.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="wrap about">
+        <h2>About</h2>
+        <div>
+          <p class="big">I've been a musician, a diesel mechanic for 12 years, a dancer and a photographer. Now I build for the web. It's less of a switch than it sounds.</p>
+          <p>Wrenching taught me to troubleshoot step by step: read the symptom, rule things out, fix the real fault, then test it. Dance and photography taught me what makes people want to show up and compete. Code is where all of that comes together.</p>
+          <p>I'm learning through freeCodeCamp and by shipping real projects. I'm looking for a junior web developer role where I can keep doing both.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="wrap about">
+        <h2>Contact</h2>
+        <ul class="contact-list">
+          <li><a href="https://github.com/Senpai-Bry">GitHub: Senpai-Bry</a></li>
+          <!-- TODO (Bry): add your email and LinkedIn, for example:
+          <li><a href="mailto:you@example.com">you@example.com</a></li>
+          <li><a href="https://www.linkedin.com/in/your-name">LinkedIn</a></li>
+          -->
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Bryan Hurst, 2026. Built with plain HTML and CSS.</div>
+  </footer>
+
+</body>
+</html>

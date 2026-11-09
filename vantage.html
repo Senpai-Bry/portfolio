@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vantage case study | Bryan Hurst</title>
+  <meta name="description" content="Vantage: a web game that turns street photography into a turf war. Case study by Bryan Hurst.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Bryan Hurst</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#about" class="hide-sm">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- TOP OF THE CASE STUDY -->
+    <section class="case-hero">
+      <div class="wrap">
+        <a class="back" href="index.html#projects">Back to projects</a>
+        <h1>Vantage</h1>
+        <p class="lede">A web game that turns street photography into a turf war. Players win real places on a city map by taking the best photo there, and keep them until someone takes a better one.</p>
+        <div class="links">
+          <a class="button" href="https://vantageturf.com">Play at vantageturf.com</a>
+          <a href="https://github.com/Senpai-Bry/vantage">Code on GitHub</a>
+        </div>
+
+        <dl class="specs">
+          <div><dt>Role</dt><dd>Solo: idea, design, build, deploy</dd></div>
+          <div><dt>Timeline</dt><dd>Sept to Nov 2026</dd></div>
+          <div><dt>Stack</dt><dd>Node.js, Express, SQLite</dd></div>
+          <div><dt>Status</dt><dd>Live, still adding features</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <figure class="fig">
+        <div class="shot">
+          <img src="images/vantage-01-explore-feed-desktop.webp" width="1600" height="1000"
+               alt="Vantage explore page: zone cards with photos on the left, a map of the Charleston area with zone markers on the right.">
+        </div>
+        <figcaption><b>Fig. 1.</b> The explore feed: 22 zones across Goose Creek, North Charleston, Summerville and Daniel Island. Screenshots use demo data; landmark photos from Wikimedia Commons.</figcaption>
+      </figure>
+    </div>
+
+    <!-- THE MANUAL: contents on the left, chapters on the right -->
+    <div class="wrap manual">
+      <nav class="contents" aria-label="Case study contents">
+        <p>Contents</p>
+        <ol>
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#how">How a turn plays</a></li>
+          <li><a href="#built">What's built</a></li>
+          <li><a href="#role">My role</a></li>
+          <li><a href="#troubleshooting">Troubleshooting log</a></li>
+          <li><a href="#design">How the design changed</a></li>
+          <li><a href="#stack">Tech stack</a></li>
+          <li><a href="#learned">What I learned</a></li>
+          <li><a href="#next">What's next</a></li>
+        </ol>
+      </nav>
+
+      <div>
+        <section class="chapter" id="problem">
+          <h2>The problem</h2>
+          <p>I'm a photographer, and I know how easy it is to stop going out to shoot. Photo apps reward follower counts, not getting out into your own city, and there's no local, friendly competition.</p>
+          <p>Dance taught me how much a little competition pushes you. Vantage puts the two together: your city becomes a map of turf, and you hold a spot until someone beats your shot. The feel is inspired by the movie <i>The Warriors</i>.</p>
+          <p><b>Who it's for:</b> hobby and street photographers who want a reason to get out and shoot. Play is asynchronous, so people join on their own schedule.</p>
+        </section>
+
+        <section class="chapter" id="how">
+          <h2>How a turn plays</h2>
+          <div class="steps-grid">
+            <ol class="steps">
+              <li><b>Find a zone.</b> The map splits each city into zones around real landmarks.</li>
+              <li><b>Shoot the challenge.</b> Every zone has a photo prompt that changes every 72 hours, like "Frame the oak canopy over the road." The photo only counts if your phone shows you're standing inside the zone.</li>
+              <li><b>The community votes.</b> One vote per photo, and you can't vote for your own.</li>
+              <li><b>Hold the turf.</b> The top-voted photo holds the zone. You earn 10 points per zone held plus 1 point per vote, and you keep the zone until someone beats your shot.</li>
+            </ol>
+            <figure class="fig">
+              <img class="phone shot" src="images/vantage-03-zone-challenge-phone.webp" width="560" height="1211" loading="lazy"
+                   alt="Phone screen: the Ashley River Road zone with its current challenge and a photo upload area.">
+              <figcaption><b>Fig. 2.</b> A zone and its challenge.</figcaption>
+            </figure>
+            <figure class="fig">
+              <img class="phone shot" src="images/vantage-04-leaderboard-phone.webp" width="560" height="1211" loading="lazy"
+                   alt="Phone screen: the leaderboard with five players ranked by points.">
+              <figcaption><b>Fig. 3.</b> The leaderboard (demo players).</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="chapter" id="built">
+          <h2>What's built</h2>
+          <ul>
+            <li><b>A real map</b> with 22 zones around landmarks in four Charleston-area cities.</li>
+            <li><b>Street-based borders</b> generated from OpenStreetMap road data. Each zone ends at major roads, about half a mile across at most, and no zones overlap.</li>
+            <li><b>Accounts</b> with hashed passwords and login tokens.</li>
+            <li><b>A geofence</b> that checks the player's GPS location against the zone border, with 30 meters of room for GPS drift.</li>
+            <li><b>Photo uploads, voting and a leaderboard.</b></li>
+            <li><b>An explore feed</b> with filters (Near me, Open turf, Your turf, Hot right now, by city) and a list/map switch on phones.</li>
+            <li><b>Player profiles</b> with stats, the turf each player holds and all their photos.</li>
+            <li><b>Cheat protection.</b> Every game rule is checked on the server, so sending requests straight to the API doesn't get around them.</li>
+          </ul>
+          <p class="muted"><b>Planned:</b> crews for team play, a countdown to the next challenge, an in-app camera that records location at the moment of the shot, skill-based divisions and sponsored zones for local businesses.</p>
+
+          <figure class="fig">
+            <div class="shot">
+              <img src="images/vantage-02-turf-map-desktop.webp" width="1600" height="1000" loading="lazy"
+                   alt="Close-up of the map: two orange zones in North Charleston whose edges follow real streets.">
+            </div>
+            <figcaption><b>Fig. 4.</b> Zone borders follow real streets. A geometry library cuts them from OpenStreetMap road data, so neighboring zones share an edge and never overlap.</figcaption>
+          </figure>
+        </section>
+
+        <section class="chapter" id="role">
+          <h2>My role</h2>
+          <p>I'm the only person on this project. I came up with the concept, made the product and design decisions, and built it with an AI coding assistant (Claude) as a pair programmer.</p>
+          <ul>
+            <li><b>My decisions:</b> the turf-war idea, the landmarks, the zone rules, the scoring formula, the 72-hour challenge rotation, the look and layout, and what to build next.</li>
+            <li><b>Code I wrote:</b> early on I typed the key code myself, including parts of the leaderboard's scoring API and frontend, and found and fixed my own bugs (a doubled route path, a misspelled function name, a missing <code>module.exports</code>).</li>
+            <li><b>Later:</b> the assistant wrote most of the code for the redesign, borders, geofence, feed and profiles. I reviewed it, tested it on my own machine, ran the data scripts, flagged design problems and committed every change.</li>
+            <li><b>Shipping:</b> I set up the GitHub repo, deployed to Railway, and bought and connected the domain.</li>
+          </ul>
+          <!-- TODO (Bry): write this in your own words, then delete the yellow box -->
+          <p class="todo"><b>Bry, fill this in:</b> in two or three sentences of your own, describe how much of the code you wrote by hand and how much the AI wrote. Recruiters will ask, and an honest answer helps you.</p>
+        </section>
+
+        <section class="chapter" id="troubleshooting">
+          <h2>Troubleshooting log</h2>
+          <p>Twelve years as a diesel mechanic taught me to work a problem like a service manual: start with the symptom, find the cause, then fix it and test it. These were the biggest ones on Vantage.</p>
+          <table class="trouble">
+            <thead>
+              <tr><th scope="col">Symptom</th><th scope="col">Cause</th><th scope="col">Fix</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Zones came out spiky and star-shaped</td>
+                <td>The first border builder drew shapes between points instead of following streets.</td>
+                <td>Rebuilt it to cut real street blocks with a geometry library, with special handling for big open areas like a military base and a golf course. Checked by code: no overlaps, every landmark inside its zone.</td>
+              </tr>
+              <tr>
+                <td>Usernames could run injected code</td>
+                <td>Player text was shown in the photo gallery without escaping (an XSS hole).</td>
+                <td>All player text is now escaped before it's shown.</td>
+              </tr>
+              <tr>
+                <td>Anyone could download files from the server</td>
+                <td>The server shared its whole code folder, database included.</td>
+                <td>Locked it down so only the public website files are served.</td>
+              </tr>
+              <tr>
+                <td>Players could skip the rules</td>
+                <td>Rules were only enforced by greyed-out buttons in the browser.</td>
+                <td>Moved every rule to the server and tested that direct API requests get rejected.</td>
+              </tr>
+              <tr>
+                <td>"429 Too Many Requests" and timeouts</td>
+                <td>Wikimedia and the OpenStreetMap download were rate-limiting my scripts.</td>
+                <td>Slowed the requests down and retried with longer waits each time.</td>
+              </tr>
+              <tr>
+                <td>Live site showed a 502 error</td>
+                <td>The domain pointed to the wrong port, and a "parked page" record was still in place.</td>
+                <td>Fixed the port and DNS records, and moved the database and photos to a disk that survives restarts.</td>
+              </tr>
+              <tr>
+                <td>Database library wouldn't install on Windows</td>
+                <td>No ready-made build existed for my Windows and Node version.</td>
+                <td>Updated to the latest version, which had one.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="chapter" id="design">
+          <h2>How the design changed</h2>
+          <p>The first concept was a dark "fog of war" map with crews and distance tracking. The first build used a dark theme. The v2 redesign moved to a light, photo-first layout so the players' photos do the talking.</p>
+          <div class="two-figs">
+            <figure class="fig">
+              <img class="phone shot" src="images/vantage-00-early-concept-mockup.webp" width="500" height="1082" loading="lazy"
+                   alt="Early concept mockup: a dark map with glowing zone outlines and a camera button.">
+              <figcaption><b>Fig. 5.</b> First concept, Sept 2026.</figcaption>
+            </figure>
+            <figure class="fig">
+              <div class="shot">
+                <img src="images/vantage-08-before-after-redesign-desktop.webp" width="1800" height="649" loading="lazy"
+                     alt="Side by side: the old dark-theme map on the left and the light v2 redesign on the right.">
+              </div>
+              <figcaption><b>Fig. 6.</b> The same zone before (dark theme, Oct 2026) and after the v2 redesign (Nov 2026).</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="chapter" id="stack">
+          <h2>Tech stack</h2>
+          <ul>
+            <li><b>Languages:</b> JavaScript, HTML, CSS, SQL</li>
+            <li><b>Backend:</b> Node.js and Express, one server for the API and the website</li>
+            <li><b>Database:</b> SQLite (better-sqlite3)</li>
+            <li><b>Login and security:</b> bcryptjs, JSON Web Tokens, dotenv</li>
+            <li><b>Photo uploads:</b> Multer</li>
+            <li><b>Map:</b> Leaflet.js with Esri tiles</li>
+            <li><b>Map data:</b> OpenStreetMap via the Overpass API, JSTS for geometry</li>
+            <li><b>Frontend:</b> plain JavaScript, no framework</li>
+            <li><b>Hosting:</b> Railway, with a Porkbun domain</li>
+          </ul>
+          <p class="muted">About 6,600 lines of code across 20 commits.</p>
+        </section>
+
+        <section class="chapter" id="learned">
+          <h2>What I learned</h2>
+          <ul>
+            <li>How the browser and the server talk to each other through an API.</li>
+            <li>How logins work: hashing passwords, issuing tokens and protecting routes.</li>
+            <li>Never trust the browser. Any rule that matters gets checked on the server.</li>
+            <li>Database basics: designing tables, using keys to enforce rules, changing structure without losing data.</li>
+            <li>A Git workflow with one commit per working change and clear messages.</li>
+            <li>Deploying a real app: hosting, persistent storage, DNS and custom domains.</li>
+            <li>Working with outside APIs: rate limits, retries and crediting content.</li>
+          </ul>
+        </section>
+
+        <section class="chapter" id="next">
+          <h2>What's next</h2>
+          <ul>
+            <li>Test the geofence on a real phone at a real zone.</li>
+            <li>Add a countdown to the next challenge.</li>
+            <li>Fill the map with real photos, starting with my own.</li>
+            <li>Build crews, so players can hold turf as a team.</li>
+          </ul>
+          <div class="links" style="margin-top:24px">
+            <a class="button" href="https://vantageturf.com">Play at vantageturf.com</a>
+            <a href="index.html#projects">Back to projects</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Bryan Hurst, 2026. Built with plain HTML and CSS.</div>
+  </footer>
+
+</body>
+</html>
