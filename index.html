@@ -7,7 +7,7 @@
   <meta name="description" content="Bryan Hurst is a web developer in Goose Creek, SC. Musician, diesel mechanic, dancer and photographer turned coder.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Permanent+Marker&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,124 +24,171 @@
   </header>
 
   <main>
-    <!-- HERO: name, one line, and the career route -->
+    <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="wrap">
-        <h1>Bryan Hurst</h1>
-        <p class="lede">Web developer in Goose Creek, South Carolina. I got here by way of music, diesel engines, dance and photography, and I use all of it when I build.</p>
+      <div class="wrap hero-grid">
+        <div>
+          <h1>Bryan Hurst</h1>
+          <p class="lede">Web developer. I got here by way of music, diesel engines, dance and photography, and I bring all of it to what I build.</p>
+        </div>
+        <dl class="plate" aria-label="Quick facts">
+          <div><dt>Based in</dt><dd>Goose Creek, SC</dd></div>
+          <div><dt>Builds</dt><dd>Full-stack web apps</dd></div>
+          <div><dt>Latest</dt><dd><a href="vantage.html">Vantage</a>, live now</dd></div>
+          <div><dt>Looking for</dt><dd>A junior web developer role</dd></div>
+        </dl>
+      </div>
+    </section>
 
-        <ol class="route" aria-label="Career path">
-          <li>
-            <span class="stop" aria-hidden="true">1</span>
+    <!-- ============ CONTACT SHEET: the career path ============ -->
+    <section class="sheet-band" aria-labelledby="path-title">
+      <div class="wrap">
+        <div class="intro">
+          <h2 id="path-title">Five frames, one roll</h2>
+          <p>Every career left me something I still use.</p>
+        </div>
+
+        <ol class="strip">
+          <li class="frame">
+            <div class="shot-box">
+              <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 24v0M12 19v10M18 13v22M24 20v8M30 8v32M36 16v16M42 22v4"/></svg>
+              <span class="edge">1A</span>
+            </div>
             <span class="role">Musician</span>
             <p>Building tracks in layers and listening for what's off.</p>
           </li>
-          <li>
-            <span class="stop" aria-hidden="true">2</span>
+          <li class="frame">
+            <div class="shot-box">
+              <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M31 7a9 9 0 0 0-8.4 12.2L8.5 33.3a3.8 3.8 0 0 0 5.4 5.4L28 24.6A9 9 0 0 0 40.4 15l-5.6 5.6-5.2-1-1-5.2L34.2 8.8A9 9 0 0 0 31 7z"/></svg>
+              <span class="edge">2A</span>
+            </div>
             <span class="role">Diesel mechanic</span>
             <p>12 years of diagnosis: find the symptom, isolate the cause, fix it.</p>
           </li>
-          <li>
-            <span class="stop" aria-hidden="true">3</span>
+          <li class="frame">
+            <div class="shot-box">
+              <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="27" cy="9" r="3.5"/><path d="M26 15l-4 11 7 6-3 10M22 26l-9 3M25 17l9 5 6-5M29 32l9 3"/></svg>
+              <span class="edge">3A</span>
+            </div>
             <span class="role">Dancer</span>
             <p>Battling in cyphers, where you get called out, you answer, and the crowd decides.</p>
           </li>
-          <li>
-            <span class="stop" aria-hidden="true">4</span>
+          <li class="frame">
+            <div class="shot-box">
+              <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M24 8l7 14M40 24l-15 4M32 38l-9-12M16 38l3-15M8 24l15-2M16 10l9 12"/></svg>
+              <span class="edge">4A</span>
+            </div>
             <span class="role">Photographer</span>
             <p>Seeing a place and finding the frame in it.</p>
           </li>
-          <li class="now">
-            <span class="stop" aria-hidden="true">5</span>
-            <span class="role">Web developer</span>
+          <li class="frame keeper">
+            <div class="shot-box">
+              <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M17 14L7 24l10 10M31 14l10 10-10 10M27 9l-6 30"/></svg>
+              <span class="edge">5A</span>
+              <svg class="circle" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <path pathLength="1" d="M52 3C80 2 98 14 97 47S84 97 50 97 3 86 3 52 22 4 56 5c10 0 18 2 24 5"/>
+              </svg>
+            </div>
+            <span class="role">Web developer <span class="note hand" aria-hidden="true">the keeper</span></span>
             <p>Building full-stack web apps that get people out into their city.</p>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- ============ PROJECTS ============ -->
     <section class="section" id="projects">
       <div class="wrap">
         <div class="section-head">
-          <h2>Projects</h2>
-          <p>Live apps, built and deployed on my own.</p>
+          <h2>Selected work</h2>
+          <p>Live apps I designed, built and deployed on my own.</p>
         </div>
 
-        <!-- Featured: Vantage -->
         <article class="feature">
-          <figure>
-            <a href="vantage.html" class="shot" aria-label="Read the Vantage case study">
-              <img src="images/vantage-02-turf-map-desktop.webp" width="1600" height="1000"
-                   alt="Vantage turf map: two zones in North Charleston shaded orange, their borders following real streets.">
-            </a>
-          </figure>
+          <a href="vantage.html" class="print" aria-label="Read the Vantage case study">
+            <img src="images/vantage-02-turf-map-desktop.webp" width="1600" height="1000"
+                 alt="Vantage turf map: two zones in North Charleston shaded orange, their borders following real streets.">
+          </a>
           <div>
             <h3>Vantage</h3>
-            <p>A web game that turns street photography into a turf war. Take the best photo at a real landmark and the spot is yours until someone shoots a better one.</p>
+            <p class="lede">Street photography as a turf war. Take the best photo at a real landmark and the spot is yours until someone shoots a better one.</p>
+            <ul class="built" aria-label="Highlights">
+              <li><b>Real map borders</b> cut from OpenStreetMap street data</li>
+              <li><b>GPS check</b> so a photo only counts if you're there</li>
+              <li><b>Server-side rules</b> so nobody can cheat the votes</li>
+            </ul>
             <ul class="stack" aria-label="Built with">
               <li>Node.js</li><li>Express</li><li>SQLite</li><li>Leaflet</li><li>OpenStreetMap</li>
             </ul>
             <div class="links">
               <a class="button" href="vantage.html">Read the case study</a>
               <a href="https://vantageturf.com">vantageturf.com</a>
-              <a href="https://github.com/Senpai-Bry/vantage">Code on GitHub</a>
+              <a href="https://github.com/Senpai-Bry/vantage">Code</a>
             </div>
           </div>
         </article>
 
-        <!-- Other projects -->
         <div class="more">
           <article class="project">
             <h3>Mech Relay</h3>
             <!-- TODO (Bry): replace this line with a one-sentence description of Mech Relay -->
             <p>Live at mechrelay.dev. Case study coming soon.</p>
-            <div class="links">
-              <a href="https://mechrelay.dev">mechrelay.dev</a>
-            </div>
+            <div class="links"><a href="https://mechrelay.dev">mechrelay.dev</a></div>
           </article>
           <article class="project planned">
             <h3>Project three</h3>
-            <p>In planning.</p>
+            <p>On the drawing board.</p>
           </article>
           <article class="project planned">
             <h3>Project four</h3>
-            <p>In planning.</p>
+            <p>On the drawing board.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="wrap about">
-        <h2>About</h2>
-        <div>
-          <p class="big">I've been a musician, a diesel mechanic for 12 years, a dancer and a photographer. Now I build for the web. It's less of a switch than it sounds.</p>
-          <p>Wrenching taught me to troubleshoot step by step: read the symptom, rule things out, fix the real fault, then test it. Dance and photography taught me what makes people want to show up and compete. Code is where all of that comes together.</p>
-          <p>I'm learning through freeCodeCamp and by shipping real projects. I'm looking for a junior web developer role where I can keep doing both.</p>
+    <!-- ============ ABOUT + CONTACT (dark band) ============ -->
+    <div class="dark">
+      <section class="section" id="about">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>About</h2>
+            <p>Musician, mechanic, dancer, photographer. Now a developer.</p>
+          </div>
+          <div class="about-grid">
+            <p class="pull">It's less of a career change than it sounds.
+              <span class="hand" aria-hidden="true">same skills, new tools</span>
+            </p>
+            <div class="body">
+              <p>Twelve years as a diesel mechanic taught me to troubleshoot step by step: read the symptom, rule things out, fix the real fault, then test it. That's most of debugging.</p>
+              <p>Dance and photography taught me what makes people want to show up and compete. Music taught me to build in layers and keep adjusting until it sounds right.</p>
+              <p>I'm learning through freeCodeCamp and by shipping real projects, and I'm looking for a junior web developer role where I can keep doing both.</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="wrap about">
-        <h2>Contact</h2>
-        <ul class="contact-list">
-          <li><a href="https://github.com/Senpai-Bry">GitHub: Senpai-Bry</a></li>
-          <!-- TODO (Bry): add your email and LinkedIn, for example:
-          <li><a href="mailto:you@example.com">you@example.com</a></li>
-          <li><a href="https://www.linkedin.com/in/your-name">LinkedIn</a></li>
-          -->
-        </ul>
-      </div>
-    </section>
+      <section class="section" id="contact">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Contact</h2>
+            <p>The fastest way to reach me.</p>
+          </div>
+          <ul class="contact-list">
+            <li><a href="https://github.com/Senpai-Bry">GitHub <span>Senpai-Bry</span></a></li>
+            <!-- TODO (Bry): add your email and LinkedIn, for example:
+            <li><a href="mailto:you@example.com">Email <span>you@example.com</span></a></li>
+            <li><a href="https://www.linkedin.com/in/your-name">LinkedIn <span>your-name</span></a></li>
+            -->
+          </ul>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="wrap">Bryan Hurst, 2026. Built with plain HTML and CSS.</div>
+      </footer>
+    </div>
   </main>
-
-  <footer class="site-footer">
-    <div class="wrap">Bryan Hurst, 2026. Built with plain HTML and CSS.</div>
-  </footer>
 
 </body>
 </html>

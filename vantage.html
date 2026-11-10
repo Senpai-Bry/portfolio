@@ -7,7 +7,7 @@
   <meta name="description" content="Vantage: a web game that turns street photography into a turf war. Case study by Bryan Hurst.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Permanent+Marker&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -46,7 +46,7 @@
 
     <div class="wrap">
       <figure class="fig">
-        <div class="shot">
+        <div class="print">
           <img src="images/vantage-01-explore-feed-desktop.webp" width="1600" height="1000"
                alt="Vantage explore page: zone cards with photos on the left, a map of the Charleston area with zone markers on the right.">
         </div>
@@ -75,7 +75,7 @@
         <section class="chapter" id="problem">
           <h2>The problem</h2>
           <p>I'm a photographer, and I know how easy it is to stop going out to shoot. Photo apps reward follower counts, not getting out into your own city, and there's no local, friendly competition.</p>
-          <p>Dance taught me how much a little competition pushes you. Vantage puts the two together: your city becomes a map of turf, and you hold a spot until someone beats your shot. The feel is inspired by the movie <i>The Warriors</i>.</p>
+          <p>Battling in dance cyphers taught me how hard people push when someone can call them out. Vantage puts the two together: your city becomes a map of turf, and you hold a spot until someone beats your shot. The feel is inspired by the movie <i>The Warriors</i>.</p>
           <p><b>Who it's for:</b> hobby and street photographers who want a reason to get out and shoot. Play is asynchronous, so people join on their own schedule.</p>
         </section>
 
@@ -88,13 +88,13 @@
               <li><b>The community votes.</b> One vote per photo, and you can't vote for your own.</li>
               <li><b>Hold the turf.</b> The top-voted photo holds the zone. You earn 10 points per zone held plus 1 point per vote, and you keep the zone until someone beats your shot.</li>
             </ol>
-            <figure class="fig">
-              <img class="phone shot" src="images/vantage-03-zone-challenge-phone.webp" width="560" height="1211" loading="lazy"
+            <figure class="fig phone">
+              <img src="images/vantage-03-zone-challenge-phone.webp" width="560" height="1211" loading="lazy"
                    alt="Phone screen: the Ashley River Road zone with its current challenge and a photo upload area.">
               <figcaption><b>Fig. 2.</b> A zone and its challenge.</figcaption>
             </figure>
-            <figure class="fig">
-              <img class="phone shot" src="images/vantage-04-leaderboard-phone.webp" width="560" height="1211" loading="lazy"
+            <figure class="fig phone">
+              <img src="images/vantage-04-leaderboard-phone.webp" width="560" height="1211" loading="lazy"
                    alt="Phone screen: the leaderboard with five players ranked by points.">
               <figcaption><b>Fig. 3.</b> The leaderboard (demo players).</figcaption>
             </figure>
@@ -116,7 +116,8 @@
           <p class="muted"><b>Planned:</b> crews for team play, a countdown to the next challenge, an in-app camera that records location at the moment of the shot, skill-based divisions and sponsored zones for local businesses.</p>
 
           <figure class="fig">
-            <div class="shot">
+            <div class="print annotated">
+              <span class="note hand" aria-hidden="true">the hard part</span>
               <img src="images/vantage-02-turf-map-desktop.webp" width="1600" height="1000" loading="lazy"
                    alt="Close-up of the map: two orange zones in North Charleston whose edges follow real streets.">
             </div>
@@ -188,13 +189,13 @@
           <h2>How the design changed</h2>
           <p>The first concept was a dark "fog of war" map with crews and distance tracking. The first build used a dark theme. The v2 redesign moved to a light, photo-first layout so the players' photos do the talking.</p>
           <div class="two-figs">
-            <figure class="fig">
-              <img class="phone shot" src="images/vantage-00-early-concept-mockup.webp" width="500" height="1082" loading="lazy"
+            <figure class="fig phone">
+              <img src="images/vantage-00-early-concept-mockup.webp" width="500" height="1082" loading="lazy"
                    alt="Early concept mockup: a dark map with glowing zone outlines and a camera button.">
               <figcaption><b>Fig. 5.</b> First concept, Sept 2026.</figcaption>
             </figure>
             <figure class="fig">
-              <div class="shot">
+              <div class="print">
                 <img src="images/vantage-08-before-after-redesign-desktop.webp" width="1800" height="649" loading="lazy"
                      alt="Side by side: the old dark-theme map on the left and the light v2 redesign on the right.">
               </div>
@@ -249,7 +250,7 @@
     </div>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer dark">
     <div class="wrap">Bryan Hurst, 2026. Built with plain HTML and CSS.</div>
   </footer>
 
