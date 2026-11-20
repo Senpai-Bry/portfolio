@@ -84,7 +84,7 @@
           <div class="steps-grid">
             <ol class="steps">
               <li><b>Find a zone.</b> The map splits each city into zones around real landmarks.</li>
-              <li><b>Shoot the challenge.</b> Every zone has a photo prompt that changes every 72 hours, like "Frame the oak canopy over the road." The photo only counts if your phone shows you're standing inside the zone.</li>
+              <li><b>Shoot the challenge.</b> Every zone has a photo prompt that changes every 72 hours, like "Frame the oak canopy over the road." To count, you have to prove you were there: upload while your phone shows you're inside the zone, or check in there and upload within 48 hours, so you can shoot on a camera and edit at home first.</li>
               <li><b>The community votes.</b> One vote per photo, and you can't vote for your own.</li>
               <li><b>Hold the turf.</b> The top-voted photo holds the zone. You earn 10 points per zone held plus 1 point per vote, and you keep the zone until someone beats your shot.</li>
             </ol>
@@ -108,12 +108,15 @@
             <li><b>Street-based borders</b> generated from OpenStreetMap road data. Each zone ends at major roads, about half a mile across at most, and no zones overlap.</li>
             <li><b>Accounts</b> with hashed passwords and login tokens.</li>
             <li><b>A geofence</b> that checks the player's GPS location against the zone border, with 30 meters of room for GPS drift.</li>
-            <li><b>Photo uploads, voting and a leaderboard.</b></li>
+            <li><b>Check-ins with a 48-hour upload window.</b> Check in at a zone with live GPS, then upload from anywhere for 48 hours. If a photo's own location tag says it was taken somewhere else, it's rejected.</li>
+            <li><b>Photo uploads, voting and a leaderboard.</b> Big camera photos are shrunk in the browser before uploading.</li>
+            <li><b>Photo privacy.</b> Every photo is redrawn in the browser and again on the server, which removes hidden details like the exact GPS location and camera serial number.</li>
             <li><b>An explore feed</b> with filters (Near me, Open turf, Your turf, Hot right now, by city) and a list/map switch on phones.</li>
             <li><b>Player profiles</b> with stats, the turf each player holds and all their photos.</li>
-            <li><b>Cheat protection.</b> Every game rule is checked on the server, so sending requests straight to the API doesn't get around them.</li>
+            <li><b>Cheat protection.</b> Every game rule is checked on the server, so sending requests straight to the API doesn't get around them. Speed limits stop fake-account voting and password guessing.</li>
+            <li><b>Account deletion</b>, password-protected. A player's photos, votes and check-ins go with the account, and any turf they held passes to the next-best photo.</li>
           </ul>
-          <p class="muted"><b>Planned:</b> crews for team play, a countdown to the next challenge, an in-app camera that records location at the moment of the shot, skill-based divisions and sponsored zones for local businesses.</p>
+          <p class="muted"><b>Planned:</b> crews for team play, a report button for bad photos, a countdown to the next challenge, an in-app camera that records location at the moment of the shot, skill-based divisions and sponsored zones for local businesses.</p>
 
           <figure class="fig">
             <div class="print annotated">
@@ -129,10 +132,10 @@
           <h2>My role</h2>
           <p>I'm the only person on this project. I came up with the concept, made the product and design decisions, and built it with an AI coding assistant (Claude) as a pair programmer.</p>
           <ul>
-            <li><b>My decisions:</b> the turf-war idea, the landmarks, the zone rules, the scoring formula, the 72-hour challenge rotation, the look and layout, and what to build next.</li>
+            <li><b>My decisions:</b> the turf-war idea, the landmarks, the zone rules, the scoring formula, the 72-hour challenge rotation, the look and layout, the check-in system and its 48-hour window, and what to build next.</li>
             <li><b>Code I wrote:</b> early on I typed the key code myself, including parts of the leaderboard's scoring API and frontend, and found and fixed my own bugs (a doubled route path, a misspelled function name, a missing <code>module.exports</code>).</li>
-            <li><b>Later:</b> the assistant wrote most of the code for the redesign, borders, geofence, feed and profiles. I reviewed it, tested it on my own machine, ran the data scripts, flagged design problems and committed every change.</li>
-            <li><b>Shipping:</b> I set up the GitHub repo, deployed to Railway, and bought and connected the domain.</li>
+            <li><b>Later:</b> the assistant wrote most of the code for the redesign, borders, geofence, feed, profiles, check-ins and security fixes. I reviewed it, tested it on my own machine, ran the data scripts, flagged design problems and committed every change.</li>
+            <li><b>Shipping:</b> I set up the GitHub repo, deployed to Railway, and bought and connected the domain. Changes now come in as pull requests that I review and merge.</li>
           </ul>
           <!-- TODO (Bry): write this in your own words, then delete the yellow box -->
           <p class="todo"><b>Bry, fill this in:</b> in two or three sentences of your own, describe how much of the code you wrote by hand and how much the AI wrote. Recruiters will ask, and an honest answer helps you.</p>
@@ -181,6 +184,36 @@
                 <td>No ready-made build existed for my Windows and Node version.</td>
                 <td>Updated to the latest version, which had one.</td>
               </tr>
+              <tr>
+                <td>A web page could be uploaded disguised as a photo, and could steal a player's login</td>
+                <td>The server kept whatever file extension the uploader sent, so a "photo" ending in .html was served as a real web page.</td>
+                <td>Only real photo types are accepted, and every upload is opened and redrawn as a fresh JPG. Anything that isn't really an image is rejected.</td>
+              </tr>
+              <tr>
+                <td>Photos gave away players' exact locations</td>
+                <td>Phone and camera photos hide details inside the file: GPS coordinates, camera serial number, the time taken.</td>
+                <td>Every photo is redrawn in the browser and again on the server, keeping only the picture. Sideways phone photos are still turned the right way up.</td>
+              </tr>
+              <tr>
+                <td>Fake accounts could out-vote real players</td>
+                <td>Nothing limited how fast accounts could be made or passwords guessed.</td>
+                <td>Added speed limits on sign-ups, logins, uploads and votes. They use the visitor address that Railway's edge sets, so visitors can't fake it.</td>
+              </tr>
+              <tr>
+                <td>A deleted account could crash the whole server</td>
+                <td>Its old login was still accepted, and the database error happened in upload code that Express's error handling doesn't cover.</td>
+                <td>Logins now check that the account still exists, and upload errors are caught and answered instead of crashing.</td>
+              </tr>
+              <tr>
+                <td>Photographers with real cameras couldn't play</td>
+                <td>The geofence only checked where the phone was at upload time, and 20 MB camera files were over the size limit.</td>
+                <td>Designed check-ins: prove you were there with live GPS, then upload from anywhere for 48 hours. Big photos are shrunk in the browser first. This trades a little cheat protection for how photographers really work.</td>
+              </tr>
+              <tr>
+                <td>"Alice" and "ALICE" could both sign up</td>
+                <td>Usernames were case-sensitive and allowed any characters at any length.</td>
+                <td>Usernames are now 3–20 letters, numbers, _ or -, and capitals don't count as a different name.</td>
+              </tr>
             </tbody>
           </table>
         </section>
@@ -211,13 +244,14 @@
             <li><b>Backend:</b> Node.js and Express, one server for the API and the website</li>
             <li><b>Database:</b> SQLite (better-sqlite3)</li>
             <li><b>Login and security:</b> bcryptjs, JSON Web Tokens, dotenv</li>
-            <li><b>Photo uploads:</b> Multer</li>
+            <li><b>Photo uploads:</b> Multer, Canvas (resizing in the browser), sharp (cleaning on the server)</li>
+            <li><b>Abuse protection:</b> express-rate-limit</li>
             <li><b>Map:</b> Leaflet.js with Esri tiles</li>
             <li><b>Map data:</b> OpenStreetMap via the Overpass API, JSTS for geometry</li>
             <li><b>Frontend:</b> plain JavaScript, no framework</li>
             <li><b>Hosting:</b> Railway, with a Porkbun domain</li>
           </ul>
-          <p class="muted">About 6,600 lines of code across 20 commits.</p>
+          <p class="muted">About 8,000 lines of code across 26 commits.</p>
         </section>
 
         <section class="chapter" id="learned">
@@ -227,7 +261,9 @@
             <li>How logins work: hashing passwords, issuing tokens and protecting routes.</li>
             <li>Never trust the browser. Any rule that matters gets checked on the server.</li>
             <li>Database basics: designing tables, using keys to enforce rules, changing structure without losing data.</li>
-            <li>A Git workflow with one commit per working change and clear messages.</li>
+            <li>A Git workflow with one commit per working change and clear messages, and reviewing changes as pull requests before they go live.</li>
+            <li>Treat every upload as hostile. A file's name and type are just claims, so the server has to check what it really is.</li>
+            <li>Security is a tradeoff against real users. Check-ins give up a little cheat protection so photographers can edit before they post.</li>
             <li>Deploying a real app: hosting, persistent storage, DNS and custom domains.</li>
             <li>Working with outside APIs: rate limits, retries and crediting content.</li>
           </ul>
@@ -236,7 +272,10 @@
         <section class="chapter" id="next">
           <h2>What's next</h2>
           <ul>
-            <li>Test the geofence on a real phone at a real zone.</li>
+            <li>Test the geofence and check-ins on a real phone at real zones.</li>
+            <li>Automated tests that run on every change.</li>
+            <li>A report button and a review page for removing bad photos.</li>
+            <li>Daily backups of the database and photos.</li>
             <li>Add a countdown to the next challenge.</li>
             <li>Fill the map with real photos, starting with my own.</li>
             <li>Build crews, so players can hold turf as a team.</li>
